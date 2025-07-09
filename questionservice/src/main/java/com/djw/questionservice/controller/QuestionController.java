@@ -3,7 +3,6 @@ package com.djw.questionservice.controller;
 import com.djw.questionservice.domain.dto.QuestionRequest;
 import com.djw.questionservice.domain.dto.QuestionResponse;
 import com.djw.questionservice.service.QuestionService;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
