@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: questionservice
+  data:
+    mongodb:
+      uri: mongo
+      database: questionDB
+
+server:
+  port: 8086
