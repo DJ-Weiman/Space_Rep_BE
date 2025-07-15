@@ -60,6 +60,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Boolean existByUserId(String userId) {
-        return null;
+        return userRepository.existsById(UUID.fromString(userId));
     }
 }
