@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/questions")
+@RequestMapping("/api/v1/questions")
 @RequiredArgsConstructor
 public class QuestionController {
     private final QuestionService questionService;
@@ -23,5 +23,10 @@ public class QuestionController {
     @GetMapping
     public ResponseEntity<List<QuestionResponse>> getUserQuestions(@RequestHeader("X-User_ID") String userId){
         return ResponseEntity.ok(questionService.getUserQuestions(userId));
+    }
+
+    @PostMapping("/create")
+    public ResponseEntity<QuestionResponse> createQuestion(@RequestBody QuestionRequest question){
+        return ResponseEntity.ok(questionService.createQuestion(question));
     }
 }

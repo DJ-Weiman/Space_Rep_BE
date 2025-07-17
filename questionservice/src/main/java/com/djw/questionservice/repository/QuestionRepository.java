@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface QuestionRepository extends MongoRepository<QuestionEntity, String> {
-    List<QuestionEntity> findByUserID(String userId);
+    List<QuestionEntity> findByUserId(String userId);
 }

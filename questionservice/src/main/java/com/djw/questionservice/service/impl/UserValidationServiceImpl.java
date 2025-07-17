@@ -17,7 +17,7 @@ public class UserValidationServiceImpl implements UserValidationService {
     public Boolean validateUser(String userId) {
         try{
             return userServiceWebClient.get()
-                    .uri("/api/users/{userId}/validate")
+                    .uri("/api/v1/users/{userId}/validate", userId)
                     .retrieve()
                     .bodyToMono(Boolean.class)
                     .block();

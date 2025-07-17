@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
 
         return UserResponse.builder()
                 .keycloakId(user.getKeycloakId())
-                .id(user.getId())
+                .id(user.getId().toString())
                 .email(user.getEmail())
                 .firstName(user.getFirstName())
                 .lastName(user.getLastName())
@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
 
         return UserResponse.builder()
                 .keycloakId(savedUser.getKeycloakId())
-                .id(savedUser.getId())
+                .id(savedUser.getId().toString())
                 .email(savedUser.getEmail())
                 .firstName(savedUser.getFirstName())
                 .lastName(savedUser.getLastName())
@@ -60,6 +60,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Boolean existByUserId(String userId) {
-        return userRepository.existsById(UUID.fromString(userId));
+        try {
+            return userRepository.existsById(UUID.fromString(userId));
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

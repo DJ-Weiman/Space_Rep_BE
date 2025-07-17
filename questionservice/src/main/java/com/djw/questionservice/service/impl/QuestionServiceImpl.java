@@ -1,5 +1,6 @@
 package com.djw.questionservice.service.impl;
 
+import com.djw.questionservice.domain.dto.QuestionRequest;
 import com.djw.questionservice.domain.dto.QuestionResponse;
 import com.djw.questionservice.domain.model.QuestionEntity;
 import com.djw.questionservice.repository.QuestionRepository;
@@ -18,6 +19,26 @@ public class QuestionServiceImpl implements QuestionService {
     private final UserValidationService userValidationService;
 
     @Override
+    public QuestionResponse createQuestion(QuestionRequest question) {
+
+        if(!userValidationService.validateUser(question.getUserId()))
+            throw new RuntimeException("Invalid User: " + question.getUserId());
+
+        QuestionEntity questionEntity = QuestionEntity.builder()
+                .questionText(question.getQuestionText())
+                .UserAnswer(question.getUserAnswer())
+                .build();
+
+        QuestionEntity savedQ = questionRepository.save(questionEntity);
+
+        return QuestionResponse.builder()
+                .questionText(savedQ.getQuestionText())
+                .createdAt(savedQ.getCreatedAt())
+                .UserAnswer(savedQ.getUserAnswer())
+                .build();
+    }
+
+    @Override
     public QuestionResponse getAllQuestions() {
         return null;
     }
@@ -29,7 +50,7 @@ public class QuestionServiceImpl implements QuestionService {
         if(!isValidUser)
             throw new RuntimeException("Invalid User: " + userId);
 
-        List<QuestionEntity> userQuestions = questionRepository.findByUserID(userId);
+        List<QuestionEntity> userQuestions = questionRepository.findByUserId(userId);
 
         return List.of();
     }
