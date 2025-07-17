@@ -1,6 +1,10 @@
 spring:
   application:
     name: ai-service
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/ai_answers
+      database: ai_answers
 
 eureka:
   client:
