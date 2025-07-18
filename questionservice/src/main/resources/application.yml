@@ -5,11 +5,24 @@ spring:
     mongodb:
       uri: mongodb://localhost:27017/QuestionsDB
       database: QuestionsDB
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
 
 eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
+
+rabbitmq:
+  exchange:
+    name: questions.exchange
+  queue:
+    name: questions.queue
+  routing:
+    key: questions.tracking
 
 logging:
   level:
